@@ -38,7 +38,7 @@ class LogLikelihood(object):
         """
         return self._dimension
 
-class LogPosterior(LogLikelihood):
+class BayesianLogLikelihood(LogLikelihood):
     """
     *Extends:* :class:`LogLikelihood`
 
