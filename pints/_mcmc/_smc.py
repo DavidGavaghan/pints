@@ -49,7 +49,7 @@ class SMC(pints.MCMC):
     """
     def __init__(self, likelihood, x0, sigma0=None):
         super(SMC, self).__init__(likelihood, x0, sigma0)
-        self._problem = likelihood.problem()
+        self._problem = likelihood._problem
         self._evaluate = self._problem.evaluate
 
         # pass the following to the _tt_evaluate functions
@@ -69,9 +69,9 @@ class SMC(pints.MCMC):
 
         # Check problem assumption:
         # Guassian log_likelihood and should have prior
-        if not isinstance(self._log_likelihood, pints.BayesianLogLikelihood):
+        if not isinstance(self._log_likelihood, pints.LogPosterior):
             raise NotImplementedError(
-                'Currently only support pints.BayesianLogLikelihood')
+                'Currently only support pints.LogPosterior')
 
         # Marginal Likelihood
         self._marginal_likelihood = None
@@ -183,18 +183,18 @@ class SMC(pints.MCMC):
         pm_model = pm.Model()
         with pm_model:
             # setup prior as PyMC3
-            # pm_prior = self._get_prior_as_pm(self._log_likelihood._prior)
-            # pm_sigma = self._get_sigma_as_pm(self._log_likelihood._prior)
+            pm_prior = self._get_prior_as_pm(self._log_likelihood._prior)
+            pm_sigma = self._get_sigma_as_pm(self._log_likelihood._prior)
 
             # setup model as PyMC3
-            # Assuming we are doing pints.BayesianLogLikelihood
-            # mu = self._tt_evaluate(pm_prior)
-            # cov = np.eye(1) * pm_sigma**2
+            # Assuming we are doing pints.LogPosterior
+            mu = self._tt_evaluate(pm_prior)
+            cov = np.eye(1) * pm_sigma**2  # Assuming pints.SingleSeriesProblem
 
             # setup likelihood as PyMC3
             # Assuming Guassian
-            # pm_likelihood = pm.MvNormal('likelihood', mu=mu, cov=cov,
-            #                            observed=self._values)
+            pm_likelihood = pm.MvNormal('likelihood', mu=mu, cov=cov, 
+                    observed=self._values)
 
             # Guess x0
             start = [
