@@ -1,5 +1,5 @@
 #
-# Exponential natural evolution strategy optimizer: xNES
+# Adaptive covariance MCMC
 #
 # This file is part of PINTS.
 #  Copyright (c) 2017, University of Oxford.

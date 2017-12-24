@@ -55,7 +55,7 @@ from ._prior import UniformPrior, NormalPrior, MultivariateNormalPrior
 # Log-likelihoods
 #
 from ._log_likelihood import LogLikelihood, LogPosterior
-from ._log_likelihood import KnownNoiseLogLikelihood, UnknownNoiseLogLikelihood
+from ._log_likelihood import KnownNoiseLogLikelihood, UnknownNoiseLogLikelihood, UnknownLogNoiseLogLikelihood
 from ._log_likelihood import ScaledLogLikelihood
 
 #
@@ -96,6 +96,7 @@ from ._mcmc._differential_evolution import (
     DreamMCMC
     )
 from ._mcmc._result import McmcResultObject
+from ._mcmc._emcee import EmceeHammerMCMC, emcee_hammer_MCMC
 
 #
 # Nested samplers
