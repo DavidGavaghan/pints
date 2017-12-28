@@ -32,7 +32,8 @@ class MCMC(object):
 
         # Store function
         if not isinstance(log_likelihood, pints.LogLikelihood):
-            raise ValueError('Given function must extend pints.LogLikelihood')
+            if not isinstance(log_likelihood, pints.LogPDF):
+                raise ValueError('Given function must extend pints.LogLikelihood or pints.LogPDF')
         self._log_likelihood = log_likelihood
 
         # Get dimension

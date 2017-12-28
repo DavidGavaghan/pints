@@ -104,6 +104,11 @@ from ._nested._ellipsoid import NestedEllipsoidSampler
 import pints.noise
 
 #
+# Toy pdfs
+#
+from .toy._logpdfs import LogPDF
+
+#
 # Remove any imported modules, so we don't expose them as part of pints
 #
 del(sys)
