@@ -13,3 +13,5 @@ from __future__ import print_function, unicode_literals
 from ._logistic import LogisticModel
 from ._logpdfs import TwistedGaussianLogPDF
 from ._logpdfs import RosenbrockLogPDF
+from ._logpdfs import MultivariateGaussianLogPDF
+from ._logpdfs import BimodalMultivariateGaussianLogPDF
