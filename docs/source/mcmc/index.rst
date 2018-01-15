@@ -14,4 +14,5 @@ parameters that maximise a :class:`LogLikelihood<pints.LogLikelihood>`.
     adaptive_covariance_mcmc
     differential_evolution_mcmc
     dream_mcmc
+    emcee
 
